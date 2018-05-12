@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SlideNavigationComponent } from './components/slide-navigation/slide-navigation.component'
 import 'materialize-css';
 
 @Component({
@@ -7,9 +8,11 @@ import 'materialize-css';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  @Input('slideNavigation')
+  private slideNavigation: SlideNavigationComponent;
 
   ngOnInit() {
-    console.log();
+
   }
+
 }

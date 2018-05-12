@@ -1,22 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { IndexPageModule } from './pages/index-page/index-page.module';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { SlideNavigationComponent } from './components/slide-navigation/slide-navigation.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     SlideNavigationComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
-    IndexPageModule,
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ],
 })
 export class AppModule { }

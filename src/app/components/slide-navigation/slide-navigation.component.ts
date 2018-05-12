@@ -1,13 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-
-const M:any = window.M;
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'slide-navigation',
   templateUrl: './slide-navigation.component.html',
   styleUrls: ['./slide-navigation.component.scss']
 })
-export class SlideNavigationComponent implements OnInit, AfterViewInit {
+export class SlideNavigationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('navigation')
   private navigation: ElementRef;
   private slideNav: any;
@@ -15,17 +13,27 @@ export class SlideNavigationComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.navigation);
+
+  }
+
+  ngOnDestroy() {
+    this.slideNav.destroy();
   }
 
   ngAfterViewInit() {
-    console.log(this.navigation);
     let { nativeElement } = this.navigation;
-    this.slideNav = M.Sidenav.init(nativeElement, {  });
+    this.slideNav = (<any>window).M.Sidenav.init(nativeElement, {
+      inDuration: 300,
+      outDuration: 300,
+    });
   }
 
-  show() {
+  open() {
     this.slideNav.open();
+  }
+
+  close() {
+    this.slideNav.close();
   }
 
 }
