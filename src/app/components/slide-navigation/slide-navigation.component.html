@@ -9,12 +9,8 @@
       <a href="#email"><span class="black-text email">jdandturk@gmail.com</span></a>
     </div>
   </li>
-  <li><a href="#!"><i class="material-icons">insert_chart</i>实时统计</a></li>
-  <li><a href="#!"><i class="material-icons">today</i>本周统计</a></li>
-  <li><a href="#!"><i class="material-icons">multiline_chart</i>本月统计</a></li>
-  <li><a href="#!"><i class="material-icons">pie_chart</i>本年统计</a></li>
-  <li>
-    <div class="divider"></div>
+  <li *ngFor="let menu of menus" routerLinkActive="active">
+    <a *ngIf="menu.type !== 'divider'" [routerLink]="menu.link" class="sidenav-close"><i class="material-icons">{{ menu.icon }}</i>{{ menu.name }}</a>
+    <div *ngIf="menu.type === 'divider'" class="divider"></div>
   </li>
-  <li><a href="#!"><i class="material-icons">trending_up</i>时间区间统计</a></li>
 </ul>

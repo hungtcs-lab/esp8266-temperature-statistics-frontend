@@ -1,0 +1,15 @@
+$padding-sizes: (
+  normal: 20px
+);
+
+@each $name, $value in $padding-sizes {
+  .padding-#{ $name } {
+    padding: $value;
+  }
+  .padding-#{ $name }-horizontal {
+    padding: 0px $value;
+  }
+  .padding-#{ $name }-vertical {
+    padding: $value 0px;
+  }
+}

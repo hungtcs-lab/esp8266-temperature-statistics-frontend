@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'slide-navigation',
@@ -8,6 +8,8 @@ import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } fr
 export class SlideNavigationComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('navigation')
   private navigation: ElementRef;
+  @Input('menus')
+  private menus: Array<any> = [];
   private slideNav: any;
 
   constructor() { }

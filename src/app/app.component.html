@@ -1,6 +1,5 @@
-<header-nav></header-nav>
+<header-navigation [name]="headerTitle"></header-navigation>
 <main>
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 </main>
-
-<slide-navigation #slideNavigation></slide-navigation>
+<slide-navigation #slideNavigation [menus]="menus"></slide-navigation>
