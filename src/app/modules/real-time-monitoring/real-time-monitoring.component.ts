@@ -1,50 +1,64 @@
+import * as moment from 'moment';
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
-
-import * as echarts from 'echarts';
+import { TemperatureService } from '../../services/temperature.service';
 
 @Component({
   selector: 'real-time-monitoring',
   templateUrl: './real-time-monitoring.component.html',
-  styleUrls: ['./real-time-monitoring.component.scss']
+  styleUrls: ['./real-time-monitoring.component.scss'],
 })
 export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   public componentName: string = '实时监控';
-  @ViewChild('echart')
-  private chart: ElementRef;
-  private charts:any = {};
+  option: any;
 
-  constructor() { }
+  constructor(private temperatureService: TemperatureService) {
+
+  }
 
   ngOnInit() {
-
+    this.getRealTimeChartData();
   }
 
   ngAfterViewInit() {
-    let { nativeElement } = this.chart;
-    let chart = echarts.init(nativeElement);
-    chart.setOption({
-      title: {
-        text: 'ECharts 入门示例'
-      },
-      tooltip: {},
-      xAxis: {
-        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-      },
-      yAxis: {},
-      series: [{
-        name: '销量',
-        type: 'line',
-        data: [5, 20, 36, 10, 10, 20]
-      }]
-    });
-    this.charts[0] = chart;
+    // setInterval(() => {
+    //   this.getRealTimeChartData();
+    // }, 1000);
   }
 
-  @HostListener('window:resize', ['$event'])
-  onWindowResize(event) {
-    Object.keys(this.charts).forEach(key => {
-      this.charts[key].resize();
-    });
+  private getRealTimeChartData() {
+    this.temperatureService.getList().then(({ status, data }) => {
+      if(status === 0) {
+        this.option = {
+          title: {
+            text: '今日温度实时监控',
+          },
+          tooltip: {
+            trigger: 'axis',
+            formatter: '{b}<br />{a}: {c}℃<br />'
+          },
+          legend: {
+            data:['室内温度']
+          },
+          xAxis: {
+            data: data.list.map(item => moment(item.datetime).format('HH:mm'))
+          },
+          yAxis: {
+            min: value => Math.round(value.min - 1),
+            max: value => Math.round(value.max + 1),
+          },
+          series: [{
+            name: '室内温度',
+            type: 'line',
+            smooth: true,
+            data: data.list.map(item => item.value),
+          }]
+        };
+      } else {
+        throw new Error(`bad status code ${ status }`);
+      }
+    }).catch(err => {
+      console.error(err);
+    })
   }
 
 }

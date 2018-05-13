@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ComponentRef } from '@angular/core';
-import { SlideNavigationComponent } from './components/slide-navigation/slide-navigation.component'
 import 'materialize-css';
 
 const menus = [
@@ -39,10 +38,8 @@ const menus = [
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  private headerTitle: string;
-  @Input('slideNavigation')
-  private slideNavigation: SlideNavigationComponent;
-  private menus = menus;
+  headerTitle: string;
+  menus = menus;
 
   ngOnInit() {
 

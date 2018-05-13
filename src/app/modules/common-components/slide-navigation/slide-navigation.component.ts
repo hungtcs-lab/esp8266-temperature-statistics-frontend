@@ -9,7 +9,7 @@ export class SlideNavigationComponent implements OnInit, OnDestroy, AfterViewIni
   @ViewChild('navigation')
   private navigation: ElementRef;
   @Input('menus')
-  private menus: Array<any> = [];
+  menus: Array<any> = [];
   private slideNav: any;
 
   constructor() { }
