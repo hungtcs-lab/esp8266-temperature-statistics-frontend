@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../esp8266-temperature-statistics/public",
       "assets": [
         "assets",
         "favicon.ico"

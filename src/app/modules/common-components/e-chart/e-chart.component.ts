@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 import * as echarts from 'echarts';
 
 @Component({
@@ -29,6 +29,13 @@ export class EChartComponent implements OnInit, AfterViewInit {
     let { nativeElement } = this.chartContainer;
     this.chartInstance = echarts.init(nativeElement);
     this.chartInstance.showLoading();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize($event) {
+    if(this.chartInstance) {
+      this.chartInstance.resize();
+    }
   }
 
 }

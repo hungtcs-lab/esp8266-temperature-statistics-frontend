@@ -20,9 +20,9 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // setInterval(() => {
-    //   this.getRealTimeChartData();
-    // }, 1000);
+    setInterval(() => {
+      this.getRealTimeChartData();
+    }, 60000);
   }
 
   private getRealTimeChartData() {
@@ -37,12 +37,15 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
             formatter: '{b}<br />{a}: {c}℃<br />'
           },
           legend: {
-            data:['室内温度']
+            data:['室内温度'],
+            bottom: 3,
           },
           xAxis: {
+            name: '时间',
             data: data.list.map(item => moment(item.datetime).format('HH:mm'))
           },
           yAxis: {
+            name: '温度 ℃',
             min: value => Math.round(value.min - 1),
             max: value => Math.round(value.max + 1),
           },
@@ -51,13 +54,24 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
             type: 'line',
             smooth: true,
             data: data.list.map(item => item.value),
-          }]
+          }],
+          dataZoom: [
+            {
+              type: 'inside',
+              filterMode: 'none'
+            },
+          ],
         };
       } else {
         throw new Error(`bad status code ${ status }`);
       }
     }).catch(err => {
       console.error(err);
+       (<any>window).M.toast({
+         html: '获取数据失败！',
+         displayLength: 5000,
+         classes: 'red',
+       });
     })
   }
 

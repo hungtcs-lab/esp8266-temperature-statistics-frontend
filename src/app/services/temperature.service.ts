@@ -11,7 +11,13 @@ export class TemperatureService {
   }
 
   getList() {
-    return this.http.get<any>(`http://temperature.hungtcs.top/api/list`, {}).toPromise<{ status: number, data: { count: number, list: Array<Temperature> } }>();
+    return this.http.get<any>(`/api/list`, {}).toPromise<{
+      status: number,
+      data: {
+        count: number,
+        list: Array<Temperature>
+      }
+    }>();
   }
 
 }
