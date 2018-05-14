@@ -10,6 +10,7 @@ import { TemperatureService } from '../../services/temperature.service';
 export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   public componentName: string = '实时监控';
   option: any;
+  latestChartOption: any;
 
   constructor(private temperatureService: TemperatureService) {
 
@@ -17,11 +18,13 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getRealTimeChartData();
+    this.getLatestChartData();
   }
 
   ngAfterViewInit() {
     setInterval(() => {
       this.getRealTimeChartData();
+      this.getLatestChartData();
     }, 60000);
   }
 
@@ -73,6 +76,67 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
          classes: 'red',
        });
     })
+  }
+
+  private getLatestChartData() {
+    this.temperatureService.getLatest().then(({ status, data }) => {
+      if(status === 0) {
+        this.latestChartOption = {
+          tooltip : {
+            formatter: "{a}<br/>{b}: {c}℃"
+          },
+          grid: {
+            bottom: 0,
+          },
+          series: [
+            {
+              name: moment(data.datetime).format('HH:mm'),
+              type: 'gauge',
+              radius: '100%',
+              axisLine: {
+                lineStyle: {
+                  width: 5
+                }
+              },
+              axisTick: {            // 坐标轴小标记
+                length: 8,        // 属性length控制线长
+                lineStyle: {       // 属性lineStyle控制线条样式
+                  color: 'auto'
+                }
+              },
+              splitLine: {           // 分隔线
+                length: 10,         // 属性length控制线长
+                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: 'auto'
+                }
+              },
+              axisLabel: {
+                color: '#333'
+              },
+              startAngle: 210,
+              endAngle: -30,
+              min: -30,
+              max: 80,
+              pointer: {
+                length: '90%',
+                width: 3,
+              },
+              detail: {
+                formatter: '{value}℃',
+                offsetCenter: ['0', '80%'],
+              },
+              data: [
+                { value: data.value, name: '实时温度' },
+              ],
+            }
+          ]
+        };
+      } else {
+        throw new Error(`${ status }`);
+      }
+    }).catch(err => {
+
+    });
   }
 
 }

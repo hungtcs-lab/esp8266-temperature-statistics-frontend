@@ -11,12 +11,20 @@ export class EChartComponent implements OnInit, AfterViewInit {
   private chartContainer: ElementRef;
   private chartInstance: any;
   private _option: any;
+  private _height: number = 400;
   @Input('option')
   set option(option) {
     this._option = option;
     if(this.chartInstance) {
       this.chartInstance.setOption(option);
       this.chartInstance.hideLoading();
+    }
+  }
+  @Input('height')
+  set height(height) {
+    this._height = height;
+    if(this.chartInstance) {
+      this.chartInstance.resize({ height });
     }
   }
 
@@ -27,6 +35,7 @@ export class EChartComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     let { nativeElement } = this.chartContainer;
+    nativeElement.style.height = `${ this._height }px`;
     this.chartInstance = echarts.init(nativeElement);
     this.chartInstance.showLoading();
   }
