@@ -3,6 +3,6 @@
  */
 export default {
   server: {
-    url: 'http://localhost:3000'
+    url: 'http://temperature.api.hungtcs.top'
   }
 }
