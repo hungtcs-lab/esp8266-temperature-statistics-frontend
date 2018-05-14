@@ -1,33 +1,23 @@
 <main>
   <div class="padding-normal">
     <div class="row">
-      <div class="col s12 m12 l4">
-        <div class="card">
-          <div class="card-content">
-            <e-chart [option]="latestChartOption" height="200"></e-chart>
-          </div>
-        </div>
+      <div class="col s12 m6 l3">
+        <cillboard name="实时温度" [value]="realTimeTemperature ? (realTimeTemperature + '℃') : '--'" css-class="green white-text" color="green"></cillboard>
       </div>
-      <div class="col s12 m12 l4">
-        <div class="card">
-          <div class="card-content">
-            <div style="height: 200px;">BBB</div>
-          </div>
-        </div>
+      <div class="col s12 m6 l3">
+        <cillboard name="今日平均温度" value="28.00℃" css-class="blue white-text" color="blue"></cillboard>
       </div>
-      <div class="col s12 m12 l4">
-        <div class="card">
-          <div class="card-content">
-            <div style="height: 200px;">BBB</div>
-          </div>
-        </div>
+      <div class="col s12 m6 l3">
+        <cillboard name="今日最高温度" value="28.00℃" css-class="orange darken-4 white-text" color="orange"></cillboard>
+      </div>
+      <div class="col s12 m6 l3">
+        <cillboard name="今日最低温度" value="28.00℃" css-class="purple darken-1 white-text" color="purple"></cillboard>
       </div>
     </div>
     <div class="row">
       <div class="col s12">
-        <div class="card">
+        <div class="card hoverable">
           <div class="card-content">
-            <!-- <div #echart style="width: 100%;height:400px;"></div> -->
             <e-chart [option]="option"></e-chart>
           </div>
         </div>
