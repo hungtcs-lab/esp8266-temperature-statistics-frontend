@@ -12,6 +12,9 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   option: any;
   // 实时温度
   realTimeTemperature: number;
+  averageTemperature: number;
+  maxTemperature: number;
+  minTemperature: number;
 
   constructor(private temperatureService: TemperatureService) {
 
@@ -20,12 +23,18 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getRealTimeChartData();
     this.getRealTimeTemperature();
+    this.getAverageTemperature();
+    this.getMinTemperature();
+    this.getMaxTemperature();
   }
 
   ngAfterViewInit() {
     setInterval(() => {
       this.getRealTimeChartData();
       this.getRealTimeTemperature();
+      this.getAverageTemperature();
+      this.getMinTemperature();
+      this.getMaxTemperature();
     }, 60000);
   }
 
@@ -86,6 +95,40 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
     this.temperatureService.getLatest().then(({ status, data }) => {
       if(status === 0) {
         this.realTimeTemperature = data.value;
+      } else {
+        throw new Error(`${ status }`);
+      }
+    }).catch(err => {
+
+    });
+  }
+
+  private getMaxTemperature() {
+    this.temperatureService.getMax().then(({ status, data }) => {
+      if(status === 0) {
+        this.maxTemperature = data.value;
+      } else {
+        throw new Error(`${ status }`);
+      }
+    }).catch(err => {
+
+    });
+  }
+  private getMinTemperature() {
+    this.temperatureService.getMin().then(({ status, data }) => {
+      if(status === 0) {
+        this.minTemperature = data.value;
+      } else {
+        throw new Error(`${ status }`);
+      }
+    }).catch(err => {
+
+    });
+  }
+  private getAverageTemperature() {
+    this.temperatureService.getAverage().then(({ status, data }) => {
+      if(status === 0) {
+        this.averageTemperature = +data.value.toFixed(2);
       } else {
         throw new Error(`${ status }`);
       }

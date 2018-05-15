@@ -5,13 +5,13 @@
         <cillboard name="实时温度" [value]="realTimeTemperature ? (realTimeTemperature + '℃') : '--'" css-class="green white-text" color="green"></cillboard>
       </div>
       <div class="col s12 m6 l3">
-        <cillboard name="今日平均温度" value="28.00℃" css-class="blue white-text" color="blue"></cillboard>
+        <cillboard name="今日平均温度" [value]="averageTemperature ? (averageTemperature + '℃') : '--'" css-class="blue white-text" color="blue"></cillboard>
       </div>
       <div class="col s12 m6 l3">
-        <cillboard name="今日最高温度" value="28.00℃" css-class="orange darken-4 white-text" color="orange"></cillboard>
+        <cillboard name="今日最高温度" [value]="maxTemperature ? (maxTemperature + '℃') : '--'" css-class="orange darken-4 white-text" color="orange"></cillboard>
       </div>
       <div class="col s12 m6 l3">
-        <cillboard name="今日最低温度" value="28.00℃" css-class="purple darken-1 white-text" color="purple"></cillboard>
+        <cillboard name="今日最低温度" [value]="minTemperature ? (minTemperature + '℃') : '--'" css-class="purple darken-1 white-text" color="purple"></cillboard>
       </div>
     </div>
     <div class="row">

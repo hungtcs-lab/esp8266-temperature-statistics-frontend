@@ -28,4 +28,31 @@ export class TemperatureService {
     }>();
   }
 
+  getMin() {
+    return this.http.get<any>(`${ config.server.url }/api/min`, {}).toPromise<{
+      status: number,
+      data: {
+        value: number,
+      },
+    }>();
+  }
+
+  getMax() {
+    return this.http.get<any>(`${ config.server.url }/api/max`, {}).toPromise<{
+      status: number,
+      data: {
+        value: number,
+      },
+    }>();
+  }
+
+  getAverage() {
+    return this.http.get<any>(`${ config.server.url }/api/average`, {}).toPromise<{
+      status: number,
+      data: {
+        value: number,
+      },
+    }>();
+  }
+
 }
