@@ -3,6 +3,6 @@
  */
 export default {
   server: {
-    url: 'http://temperature.api.hungtcs.top'
+    url: 'https://temperature.api.hungtcs.top'
   }
 }
