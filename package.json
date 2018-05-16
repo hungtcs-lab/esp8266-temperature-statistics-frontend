@@ -4,12 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "start": "ng serve --delete-output-path=false",
+    "build": "ng build --prod --delete-output-path=false",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "archive": "ng build --prod && mkdir -p archives && tar -cvzf archives/dist.tar.gz dist"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

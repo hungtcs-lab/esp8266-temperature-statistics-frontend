@@ -94,7 +94,7 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   private getRealTimeTemperature() {
     this.temperatureService.getLatest().then(({ status, data }) => {
       if(status === 0) {
-        this.realTimeTemperature = data.value;
+        this.realTimeTemperature = +data.value.toFixed(2);
       } else {
         throw new Error(`${ status }`);
       }
@@ -106,7 +106,7 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   private getMaxTemperature() {
     this.temperatureService.getMax().then(({ status, data }) => {
       if(status === 0) {
-        this.maxTemperature = data.value;
+        this.maxTemperature = +data.value.toFixed(2);
       } else {
         throw new Error(`${ status }`);
       }
@@ -117,7 +117,7 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
   private getMinTemperature() {
     this.temperatureService.getMin().then(({ status, data }) => {
       if(status === 0) {
-        this.minTemperature = data.value;
+        this.minTemperature = +data.value.toFixed(2);
       } else {
         throw new Error(`${ status }`);
       }
