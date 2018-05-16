@@ -33,6 +33,8 @@ export class TemperatureService {
       status: number,
       data: {
         value: number,
+        count: number,
+        list: Array<Temperature>,
       },
     }>();
   }
@@ -42,6 +44,8 @@ export class TemperatureService {
       status: number,
       data: {
         value: number,
+        count: number,
+        list: Array<Temperature>,
       },
     }>();
   }
