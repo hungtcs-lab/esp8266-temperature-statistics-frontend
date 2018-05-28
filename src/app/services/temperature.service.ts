@@ -59,4 +59,11 @@ export class TemperatureService {
     }>();
   }
 
+  getThisWeekAverage() {
+    return this.http.get<any>(`${ config.server.url }/api/this-week-average`, {}).toPromise<{
+      status: number,
+      data: Array<{dayofweek: number, value: number}>,
+    }>();
+  }
+
 }

@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TemperatureService } from '../../services/temperature.service';
 
 @Component({
