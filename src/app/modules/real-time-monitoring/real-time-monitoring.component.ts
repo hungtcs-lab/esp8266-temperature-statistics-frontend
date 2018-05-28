@@ -47,6 +47,7 @@ export class RealTimeMonitoringComponent implements OnInit, AfterViewInit {
           },
           grid: {
             containLabel: true,
+            left: '5%',
           },
           tooltip: {
             trigger: 'axis',
